@@ -1,10 +1,10 @@
 class Job {
-  final int _id;
-  final String _company;
-  final String _location;
-  final String _position;
-  final Stirng _description;
-  final String _url;
+  int _id;
+  String _company;
+  String _location;
+  String _position;
+  String _description;
+  String _url;
 
   Job(this._company, this._location, this._position, this._description,
       this._url);
@@ -28,7 +28,7 @@ class Job {
   }
 
   set position(String newPosition) {
-    this._position - newPosition;
+    this._position = newPosition;
   }
 
   set description(String newDescription) {
@@ -56,8 +56,8 @@ class Job {
 // Convert Map to Job
   Job.fromMapObject(Map<String, dynamic> map) {
     this._id = map['id'];
-    this._title = map['company'];
-    this._location = map['location']);
+    this._company = map['company'];
+    this._location = map['location'];
     this._position = map['position'];
     this._description = map['description'];
     this._url = map['url'];

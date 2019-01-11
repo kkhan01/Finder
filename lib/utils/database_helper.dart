@@ -85,6 +85,18 @@ class DatabaseHelper {
 		return result;
   }
 
+  // Get the 'Map List' [ List<Map> ] and convert it to 'Job List' [ List<Job> ]
+	Future<List<Job>> getJobList() async {
+		var jobMapList = await getJobMapList(); // Get 'Map List' from database
+		int count = jobMapList.length;         // Count the number of map entries in db table
 
+		List<Job> jobList = List<Job>();
+		// For loop to create a 'Job List' from a 'Map List'
+		for (int i = 0; i < count; i++) {
+			jobList.add(Job.fromMapObject(jobMapList[i]));
+		}
+
+		return jobList;
+  }
   
 }

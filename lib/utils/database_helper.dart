@@ -17,6 +17,8 @@ class DatabaseHelper {
 	String colPosition = 'position';
   String colUrl = 'url';
 
+  DatabaseHelper._createInstance(); // Named constructor to create instance of DatabaseHelper
+  
   factory DatabaseHelper() {
 		if (_databaseHelper == null) {
 			_databaseHelper = DatabaseHelper._createInstance(); // This is executed only once, singleton object

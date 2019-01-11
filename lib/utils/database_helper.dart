@@ -61,5 +61,14 @@ class DatabaseHelper {
 		var result = await db.insert(jobTable, job.toMap());
 		return result;
   }
+
+  // Update Operation: Update a Job object and save it to database
+	Future<int> updateJob(Job job) async {
+		var db = await this.database;
+		var result = await db.update(jobTable, job.toMap(), where: '$colId = ?', whereArgs: [job.id]);
+		return result;
+  }
+
+
   
 }

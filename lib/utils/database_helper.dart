@@ -18,7 +18,6 @@ class DatabaseHelper {
   String colUrl = 'url';
 
   factory DatabaseHelper() {
-
 		if (_databaseHelper == null) {
 			_databaseHelper = DatabaseHelper._createInstance(); // This is executed only once, singleton object
 		}
@@ -26,7 +25,6 @@ class DatabaseHelper {
   }
 
   Future<Database> get database async {
-
 		if (_database == null) {
 			_database = await initializeDatabase();
 		}
@@ -44,10 +42,17 @@ class DatabaseHelper {
   }
 
   void _createDb(Database db, int newVersion) async {
-
 		await db.execute('CREATE TABLE $jobTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colCompany TEXT, '
 			'$colDescription TEXT, $colLocation TEXT, $colPosition TEXT, $colUrl TEXT)');
   }
 
+  // Fetch Operation: Get all job objects from database
+	Future<List<Map<String, dynamic>>> getJobMapList() async {
+		Database db = await this.database;
+
+    //		var result = await db.rawQuery('SELECT * FROM $jobTable order by $colId ASC');
+		var result = await db.query(jobTable, orderBy: '$colId ASC');
+		return result;
+  }
   
 }

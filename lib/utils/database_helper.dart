@@ -62,6 +62,7 @@ class DatabaseHelper {
 		return result;
   }
 
+  // THIS LIKELY WONT BE USED, BETTER SAFE THAN SORRY
   // Update Operation: Update a Job object and save it to database
 	Future<int> updateJob(Job job) async {
 		var db = await this.database;

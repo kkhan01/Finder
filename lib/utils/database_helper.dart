@@ -54,5 +54,12 @@ class DatabaseHelper {
 		var result = await db.query(jobTable, orderBy: '$colId ASC');
 		return result;
   }
+
+  // Insert Operation: Insert a Job object to database
+	Future<int> insertJob(Job job) async {
+		Database db = await this.database;
+		var result = await db.insert(jobTable, job.toMap());
+		return result;
+  }
   
 }

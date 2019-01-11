@@ -17,4 +17,18 @@ class DatabaseHelper {
   String colDescription = 'description';
   String colUrl = 'url';
 
+  factory DatabaseHelper() {
+
+		if (_databaseHelper == null) {
+			_databaseHelper = DatabaseHelper._createInstance(); // This is executed only once, singleton object
+		}
+		return _databaseHelper;
+  }
+
+
+
+
+
+
+  
 }

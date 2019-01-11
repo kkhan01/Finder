@@ -52,7 +52,7 @@ class DatabaseHelper {
 	Future<List<Map<String, dynamic>>> getJobMapList() async {
 		Database db = await this.database;
 
-    //		var result = await db.rawQuery('SELECT * FROM $jobTable order by $colId ASC');
+    // var result = await db.rawQuery('SELECT * FROM $jobTable order by $colId ASC');
 		var result = await db.query(jobTable, orderBy: '$colId ASC');
 		return result;
   }

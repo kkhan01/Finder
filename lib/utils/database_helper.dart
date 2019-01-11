@@ -33,7 +33,15 @@ class DatabaseHelper {
 		return _database;
   }
 
+  Future<Database> initializeDatabase() async {
+		// Get the directory path for both Android and iOS to store database.
+		Directory directory = await getApplicationDocumentsDirectory();
+		String path = directory.path + 'jobs.db';
 
+		// Open/create the database at a given path
+		var jobsDatabase = await openDatabase(path, version: 1, onCreate: _createDb);
+		return jobsDatabase;
+  }
 
 
   

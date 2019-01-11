@@ -12,6 +12,16 @@ class Job {
   Job.withId(this._id, this._company, this._location, this._position,
       this._description, this._url);
 
+  factory Job.fromJson(Map<String, dynamic> json) {
+    return new Job(
+      json['company']['name'] as String,
+      json['company']['location']['name'] as String,
+      json['title'] as String,
+      json['description'] as String,
+      json['apply_url'] as String,
+    );
+  }
+
   int get id => _id;
   String get company => _company;
   String get location => _location;
@@ -53,13 +63,4 @@ class Job {
     return map;
   }
 
-// Convert Map to Job
-  Job.fromMapObject(Map<String, dynamic> map) {
-    this._id = map['id'];
-    this._company = map['company'];
-    this._location = map['location'];
-    this._position = map['position'];
-    this._description = map['description'];
-    this._url = map['url'];
-  }
 }

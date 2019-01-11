@@ -12,9 +12,9 @@ class DatabaseHelper {
 	String jobTable = 'job_table';
 	String colId = 'id';
 	String colCompany = 'company';
+  String colDescription = 'description';
 	String colLocation = 'location';
 	String colPosition = 'position';
-  String colDescription = 'description';
   String colUrl = 'url';
 
   factory DatabaseHelper() {
@@ -43,6 +43,11 @@ class DatabaseHelper {
 		return jobsDatabase;
   }
 
+  void _createDb(Database db, int newVersion) async {
+
+		await db.execute('CREATE TABLE $jobTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colCompany TEXT, '
+			'$colDescription TEXT, $colLocation TEXT, $colPosition TEXT, $colUrl TEXT)');
+  }
 
   
 }

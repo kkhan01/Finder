@@ -63,4 +63,13 @@ class Job {
     return map;
   }
 
+  // Convert Map to Job
+  Job.fromMapObject(Map<String, dynamic> map) {
+    this._id = map['id'];
+    this._company = map['company'];
+    this._location = map['location'];
+    this._position = map['position'];
+    this._description = map['description'];
+    this._url = map['url'];
+  }
 }

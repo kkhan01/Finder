@@ -57,11 +57,11 @@ class PageTwo extends MaterialPageRoute<Null> {
             new IconButton(
               icon: new Icon(Icons.check),
               onPressed: () {
-              Navigator.push(
-                ctx,
-                MyApp()
-              );
-            }
+                Navigator.push(
+                  ctx,
+                  MyApp()
+                );
+              }
             ),
           ],
           leading: new Container(),
@@ -112,3 +112,11 @@ class PageThree extends MaterialPageRoute<Null> {
   });
 
 }
+
+/* Button Icons:
+Icons.check
+Icons.build
+Icons.keyboard_arrow_left
+Icons.inbox
+Icons.done_all
+*/

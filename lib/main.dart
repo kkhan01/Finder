@@ -53,6 +53,18 @@ class PageTwo extends MaterialPageRoute<Null> {
   PageTwo() : super(builder: (BuildContext ctx) {
       return Scaffold(
         appBar: AppBar(
+          actions: <Widget>[
+            new IconButton(
+              icon: new Icon(Icons.check),
+              onPressed: () {
+              Navigator.push(
+                ctx,
+                MyApp()
+              );
+            }
+            ),
+          ],
+          leading: new Container(),
           backgroundColor: Theme.of(ctx).canvasColor,
           elevation: 1.0,
         ),

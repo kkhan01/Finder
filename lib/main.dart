@@ -8,6 +8,8 @@ import './models/job.dart';
 
 /*
 LINKS:
+General Design: https://whimsical.co/2jbY96yxpqqDxoeaLKFHDk
+
 Three page: https://www.youtube.com/watch?v=b2fgMCeSNpY
 Tinder-esque: https://www.youtube.com/watch?v=NMHhzd5ewP4
 
@@ -27,8 +29,8 @@ void main() {
 }
 
 final ThemeData themeData = ThemeData(
-  canvasColor: Colors.lightGreenAccent,
-  accentColor: Colors.redAccent,
+  canvasColor: Colors.grey[50],
+  accentColor: Colors.deepPurple,
 );
 
 class MyApp extends StatelessWidget {

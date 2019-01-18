@@ -41,14 +41,14 @@ class MyApp extends StatelessWidget {
         backgroundColor: Theme.of(ctx).accentColor,
         elevation: 2.0,
         leading: new IconButton(
-          icon: new Icon(Icons.build),
-          onPressed: () => Navigator.push(ctx, PageThree()),
+          icon: new Icon(Icons.inbox),
+          onPressed: () => Navigator.push(ctx, PageTwo()),
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.inbox),
+            icon: Icon(Icons.build),
             onPressed: (){
-              Navigator.push(ctx, PageTwo());
+              Navigator.push(ctx, PageThree());
             },
           )
         ],

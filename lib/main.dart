@@ -23,6 +23,7 @@ Flutter Studio: http://mutisya.com/
 
 void main() {
   runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: MyApp(),
       theme: themeData,
   ));

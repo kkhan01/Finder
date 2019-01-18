@@ -1,12 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
-import 'package:html/parser.dart';
-import 'dart:convert';
-import 'dart:async';
-import './models/job.dart';
-
 /*
+SEARCH FOR "TODO" for tasks
+
 LINKS:
 General Design: https://whimsical.co/2jbY96yxpqqDxoeaLKFHDk
 
@@ -14,11 +8,23 @@ Three page: https://www.youtube.com/watch?v=b2fgMCeSNpY
 Tinder-esque: https://www.youtube.com/watch?v=NMHhzd5ewP4
 
 Task Manager: https://github.com/jiachangyang1025/flutter-sqflite-todo-app
-Database: https://github.com/smartherd/Flutter-Demos
+Database: 
+https://github.com/smartherd/Flutter-Demos
+https://www.youtube.com/watch?v=1BwjNEKD8g8&index=25&list=PLlxmoA0rQ-Lw6tAs2fGFuXGP13-dWdKsB
 Misc Demo: https://github.com/rahulkp220/Learning-Flutter
 Published app: https://github.com/FrazileDevelopers/Wallfy
 Flutter Studio: http://mutisya.com/
 */
+
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'package:html/parser.dart';
+import 'dart:convert';
+import 'dart:async';
+import './models/job.dart';
+// TODO: merge legacy.dart
+// TODO: add database_helper.dart
 
 
 void main() {
@@ -29,16 +35,19 @@ void main() {
   ));
 }
 
+// TODO: choose theme colors
 final ThemeData themeData = ThemeData(
   canvasColor: Colors.pinkAccent[100],
   accentColor: Colors.deepPurple,
 );
 
 class MyApp extends StatelessWidget {
+  
   Widget _buildBottomBar() {
     return BottomAppBar(
       color: Colors.transparent,
       elevation: 0.0,
+      // TODO: LATER TASK: work out padding so it looks better maybe. it might be fine as is
       child: new Padding(
         padding: const EdgeInsets.all(16.0),
         child: new Row(
@@ -48,21 +57,21 @@ class MyApp extends StatelessWidget {
               icon: Icons.clear,
               iconColor: Colors.red,
               onPressed: () {
-                // TODO: 
+                // TODO: ignore job
               },
             ),
             new RoundIconButton.small(
               icon: Icons.refresh,
               iconColor: Colors.orange,
               onPressed: () {
-                // TODO:
+                // TODO: refresh job list with api
               },
             ),
             new RoundIconButton.large(
               icon: Icons.favorite,
               iconColor: Colors.green,
               onPressed: () {
-                // TODO: 
+                // TODO: add job to database
               },
             ),
           ],
@@ -92,6 +101,9 @@ class MyApp extends StatelessWidget {
           )
         ],
       ),
+      
+      // TODO: add card class and make it work with api
+      // (can test with hard coded joblist before incorportating api)
       body: Center(
         child: FlatButton(
           onPressed: (){
@@ -119,6 +131,8 @@ class PageTwo extends MaterialPageRoute<Null> {
             )
           ],
         ),
+        
+        // TODO: umm list out jobs from database, follow task manager as guide
         body: Center(
           child: RaisedButton(
             onPressed: () {
@@ -146,12 +160,14 @@ class PageThree extends MaterialPageRoute<Null> {
             IconButton(
               icon: Icon(Icons.check),
               onPressed: (){
-                // save method here
+                // TODO: save settings method called here, are we using another db? we should use a json or smth....
                 Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));
               },
             )
           ],
         ),
+        
+        // TODO: form for api search
         body: Center(
           child: MaterialButton(
             onPressed: (){
@@ -164,16 +180,6 @@ class PageThree extends MaterialPageRoute<Null> {
   });
 
 }
-
-
-/* Button Icons:
-Icons.check
-Icons.build
-Icons.keyboard_arrow_left
-Icons.inbox
-Icons.done_all
-*/
-
 
 class RoundIconButton extends StatelessWidget {
   final IconData icon;

@@ -35,7 +35,7 @@ void main() {
   ));
 }
 
-// TODO: choose theme colors
+// TODO: LATER TASK: choose theme colors
 final ThemeData themeData = ThemeData(
   canvasColor: Colors.limeAccent[700],
   accentColor: Colors.lightGreen[900],

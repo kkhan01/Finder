@@ -30,11 +30,47 @@ void main() {
 }
 
 final ThemeData themeData = ThemeData(
-  canvasColor: Colors.grey[50],
+  canvasColor: Colors.pinkAccent[100],
   accentColor: Colors.deepPurple,
 );
 
 class MyApp extends StatelessWidget {
+  Widget _buildBottomBar() {
+    return BottomAppBar(
+      color: Colors.transparent,
+      elevation: 0.0,
+      child: new Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            new RoundIconButton.large(
+              icon: Icons.clear,
+              iconColor: Colors.red,
+              onPressed: () {
+                // TODO: 
+              },
+            ),
+            new RoundIconButton.small(
+              icon: Icons.refresh,
+              iconColor: Colors.orange,
+              onPressed: () {
+                // TODO:
+              },
+            ),
+            new RoundIconButton.large(
+              icon: Icons.favorite,
+              iconColor: Colors.green,
+              onPressed: () {
+                // TODO: 
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  
   @override
   Widget build(BuildContext ctx) {
     return Scaffold(
@@ -64,6 +100,7 @@ class MyApp extends StatelessWidget {
           child: Text("Go to Page Two"),
         ),
       ),
+      bottomNavigationBar: _buildBottomBar(),
     );
   }
 }
@@ -136,3 +173,4 @@ Icons.keyboard_arrow_left
 Icons.inbox
 Icons.done_all
 */
+

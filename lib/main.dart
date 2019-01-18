@@ -73,8 +73,13 @@ class PageTwo extends MaterialPageRoute<Null> {
         appBar: AppBar(
           centerTitle: true,
           title: Text("SAVED"),
-          backgroundColor: Theme.of(ctx).canvasColor,
-          elevation: 1.0,
+          backgroundColor: Theme.of(ctx).accentColor,
+          elevation: 2.0,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.check, color:Theme.of(ctx).accentColor)
+            )
+          ],
         ),
         body: Center(
           child: RaisedButton(
@@ -103,8 +108,8 @@ class PageThree extends MaterialPageRoute<Null> {
             IconButton(
               icon: Icon(Icons.check),
               onPressed: (){
-                Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));
                 // save method here
+                Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));
               },
             )
           ],

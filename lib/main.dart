@@ -37,8 +37,8 @@ void main() {
 
 // TODO: choose theme colors
 final ThemeData themeData = ThemeData(
-  canvasColor: Colors.pinkAccent[100],
-  accentColor: Colors.deepPurple,
+  canvasColor: Colors.limeAccent[700],
+  accentColor: Colors.lightGreen[900],
 );
 
 class MyApp extends StatelessWidget {

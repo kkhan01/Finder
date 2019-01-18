@@ -31,7 +31,6 @@ final ThemeData themeData = ThemeData(
   accentColor: Colors.redAccent,
 );
 
-// main page
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext ctx) {
@@ -48,23 +47,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// page two
 class PageTwo extends MaterialPageRoute<Null> {
   PageTwo() : super(builder: (BuildContext ctx) {
       return Scaffold(
         appBar: AppBar(
-          actions: <Widget>[
-            new IconButton(
-              icon: new Icon(Icons.check),
-              onPressed: () {
-                Navigator.push(
-                  ctx,
-                  MyApp()
-                );
-              }
-            ),
-          ],
-          leading: new Container(),
           backgroundColor: Theme.of(ctx).canvasColor,
           elevation: 1.0,
         ),
@@ -83,7 +69,6 @@ class PageTwo extends MaterialPageRoute<Null> {
   });
 }
 
-// page three
 class PageThree extends MaterialPageRoute<Null> {
   PageThree() : super(builder: (BuildContext ctx) {
       return Scaffold(
@@ -112,6 +97,7 @@ class PageThree extends MaterialPageRoute<Null> {
   });
 
 }
+
 
 /* Button Icons:
 Icons.check

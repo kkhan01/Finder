@@ -35,6 +35,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext ctx) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Job Search"),
+        backgroundColor: Theme.of(ctx).accentColor,
+        elevation: 2.0,
+        leading: new IconButton(
+          icon: new Icon(Icons.build),
+          onPressed: () => Navigator.push(ctx, PageThree()),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.inbox),
+            onPressed: (){
+              Navigator.push(ctx, PageTwo());
+            },
+          )
+        ],
+      ),
       body: Center(
         child: FlatButton(
           onPressed: (){
@@ -51,6 +69,8 @@ class PageTwo extends MaterialPageRoute<Null> {
   PageTwo() : super(builder: (BuildContext ctx) {
       return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
+          title: Text("SAVED"),
           backgroundColor: Theme.of(ctx).canvasColor,
           elevation: 1.0,
         ),
@@ -73,14 +93,16 @@ class PageThree extends MaterialPageRoute<Null> {
   PageThree() : super(builder: (BuildContext ctx) {
       return Scaffold(
         appBar: AppBar(
-          title: Text("Last Page!"),
+          centerTitle: true,
+          title: Text("SETTINGS"),
           backgroundColor: Theme.of(ctx).accentColor,
           elevation: 2.0,
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.close),
+              icon: Icon(Icons.check),
               onPressed: (){
-                Navigator.pop(ctx);
+                Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));
+                // save method here
               },
             )
           ],

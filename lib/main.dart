@@ -43,43 +43,6 @@ final ThemeData themeData = ThemeData(
 
 class MyApp extends StatelessWidget {
   
-  Widget _buildBottomBar() {
-    return BottomAppBar(
-      color: Colors.transparent,
-      elevation: 0.0,
-      // TODO: LATER TASK: work out padding so it looks better maybe. it might be fine as is
-      child: new Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            new RoundIconButton.large(
-              icon: Icons.clear,
-              iconColor: Colors.red,
-              onPressed: () {
-                // TODO: ignore job
-              },
-            ),
-            new RoundIconButton.small(
-              icon: Icons.refresh,
-              iconColor: Colors.orange,
-              onPressed: () {
-                // TODO: refresh job list with api
-              },
-            ),
-            new RoundIconButton.large(
-              icon: Icons.favorite,
-              iconColor: Colors.green,
-              onPressed: () {
-                // TODO: add job to database
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-  
   @override
   Widget build(BuildContext ctx) {
     return Scaffold(
@@ -112,7 +75,40 @@ class MyApp extends StatelessWidget {
           child: Text("Go to Page Two"),
         ),
       ),
-      bottomNavigationBar: _buildBottomBar(),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.transparent,
+        elevation: 0.0,
+        // TODO: LATER TASK: work out padding so it looks better maybe. it might be fine as is
+        child: new Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              new RoundIconButton.large(
+                icon: Icons.clear,
+                iconColor: Colors.red,
+                onPressed: () {
+                  // TODO: ignore job
+                },
+              ),
+              new RoundIconButton.small(
+                icon: Icons.refresh,
+                iconColor: Colors.orange,
+                onPressed: () {
+                  // TODO: refresh job list with api
+                },
+              ),
+              new RoundIconButton.large(
+                icon: Icons.favorite,
+                iconColor: Colors.green,
+                onPressed: () {
+                  // TODO: add job to database
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

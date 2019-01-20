@@ -18,6 +18,7 @@ Flutter Studio: http://mutisya.com/
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:glowing_guacamole/models/job_card.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart';
 import 'dart:convert';
@@ -31,15 +32,9 @@ void main() {
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MyApp(),
-      theme: themeData,
+      // theme: themeData,
   ));
 }
-
-// TODO: LATER TASK: choose theme colors
-final ThemeData themeData = ThemeData(
-  canvasColor: Color(0xff3F51B5),
-  accentColor: Color(0xff303F9F),
-);
 
 class MyApp extends StatelessWidget {
   
@@ -48,16 +43,28 @@ class MyApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Job Search"),
-        backgroundColor: Theme.of(ctx).accentColor,
-        elevation: 2.0,
+        title: Text(
+          "Job Search",
+          style: TextStyle(
+            color: Colors.black
+            ),
+          ),
+        // backgroundColor: Theme.of(ctx).accentColor,
+        backgroundColor: Colors.white,
+        elevation: 0.0,
         leading: new IconButton(
-          icon: new Icon(Icons.inbox),
+          icon: new Icon(
+            Icons.inbox,
+            color: Colors.black,
+          ),
           onPressed: () => Navigator.push(ctx, PageTwo()),
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: Icon(
+              Icons.settings,
+              color: Colors.black,
+            ),
             onPressed: (){
               Navigator.push(ctx, PageThree());
             },
@@ -69,18 +76,17 @@ class MyApp extends StatelessWidget {
       // (can test with hard coded joblist before incorportating api)
       body: Container(
         color: Colors.white,
-        child: Center(
-          child: FlatButton(
-            onPressed: (){
-              Navigator.push(ctx, PageTwo());
-            },
-            child: Text("Go to Page Two"),
+        child: JobCard(
+          company: "Facebook",
+          location: "New York, NY",
+          position: "Software Engineer, Intern/Co-op",
+          description: "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds",
+          url: "https://www.facebook.com",
           ),
-        ),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
-        // elevation: 0.0,
+        elevation: 0.0,
         // TODO: LATER TASK: work out padding so it looks better maybe. it might be fine as is
         child: new Padding(
           padding: const EdgeInsets.only(
@@ -94,7 +100,7 @@ class MyApp extends StatelessWidget {
             children: <Widget>[
               new RoundIconButton.large(
                 icon: Icons.clear,
-                iconColor: Colors.red,
+                iconColor: Colors.red[500],
                 onPressed: () {
                   // TODO: ignore job
                 },
@@ -108,7 +114,7 @@ class MyApp extends StatelessWidget {
               ),
               new RoundIconButton.large(
                 icon: Icons.favorite,
-                iconColor: Colors.green,
+                iconColor: Colors.green[500],
                 onPressed: () {
                   // TODO: add job to database
                 },
@@ -126,12 +132,23 @@ class PageTwo extends MaterialPageRoute<Null> {
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("SAVED"),
-          backgroundColor: Theme.of(ctx).accentColor,
-          elevation: 2.0,
+          title: Text(
+            "SAVED",
+            style: TextStyle(
+              color: Colors.black
+            ),
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0.0,
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.check, color:Theme.of(ctx).accentColor)
+              icon: Icon(
+                Icons.check, 
+                color: Colors.black
+              ),
+              onPressed: () {
+                Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));
+              },
             )
           ],
         ),
@@ -141,13 +158,10 @@ class PageTwo extends MaterialPageRoute<Null> {
           color: Colors.white,
           child: Center(
             child: RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                  ctx,
-                  PageThree()
-                );
+              onPressed: (){
+                Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));
               },
-              child: Text("Go to Page Three"),
+              child: Text("Go Home!"),
             ),
           ),
         ),
@@ -160,12 +174,20 @@ class PageThree extends MaterialPageRoute<Null> {
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("SETTINGS"),
-          backgroundColor: Theme.of(ctx).accentColor,
-          elevation: 2.0,
+          title: Text(
+            "SETTINGS",
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0.0,
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.check),
+              icon: Icon(
+                Icons.check,
+                color: Colors.black,
+              ),
               onPressed: (){
                 // TODO: save settings method called here, are we using another db? we should use a json or smth....
                 Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));

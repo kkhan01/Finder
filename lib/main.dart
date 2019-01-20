@@ -37,8 +37,8 @@ void main() {
 
 // TODO: LATER TASK: choose theme colors
 final ThemeData themeData = ThemeData(
-  canvasColor: Colors.limeAccent[700],
-  accentColor: Colors.lightGreen[900],
+  canvasColor: Color(0xff3F51B5),
+  accentColor: Color(0xff303F9F),
 );
 
 class MyApp extends StatelessWidget {
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.build),
+            icon: Icon(Icons.settings),
             onPressed: (){
               Navigator.push(ctx, PageThree());
             },
@@ -67,20 +67,28 @@ class MyApp extends StatelessWidget {
       
       // TODO: add card class and make it work with api
       // (can test with hard coded joblist before incorportating api)
-      body: Center(
-        child: FlatButton(
-          onPressed: (){
-            Navigator.push(ctx, PageTwo());
-          },
-          child: Text("Go to Page Two"),
+      body: Container(
+        color: Colors.white,
+        child: Center(
+          child: FlatButton(
+            onPressed: (){
+              Navigator.push(ctx, PageTwo());
+            },
+            child: Text("Go to Page Two"),
+          ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.transparent,
-        elevation: 0.0,
+        color: Colors.white,
+        // elevation: 0.0,
         // TODO: LATER TASK: work out padding so it looks better maybe. it might be fine as is
         child: new Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(
+            top: 16.0,
+            bottom: 16.0,
+            left: 24.0,
+            right: 24.0
+            ),
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -129,15 +137,18 @@ class PageTwo extends MaterialPageRoute<Null> {
         ),
         
         // TODO: umm list out jobs from database, follow task manager as guide
-        body: Center(
-          child: RaisedButton(
-            onPressed: () {
-              Navigator.push(
-                ctx,
-                PageThree()
-              );
-            },
-            child: Text("Go to Page Three"),
+        body: Container(
+          color: Colors.white,
+          child: Center(
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.push(
+                  ctx,
+                  PageThree()
+                );
+              },
+              child: Text("Go to Page Three"),
+            ),
           ),
         ),
       );
@@ -164,12 +175,15 @@ class PageThree extends MaterialPageRoute<Null> {
         ),
         
         // TODO: form for api search
-        body: Center(
-          child: MaterialButton(
-            onPressed: (){
-              Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));
-            },
-            child: Text("Go Home!"),
+        body: Container(
+          color: Colors.white,
+          child: Center(
+            child: MaterialButton(
+              onPressed: (){
+                Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));
+              },
+              child: Text("Go Home!"),
+            ),
           ),
         ),
       );
@@ -187,7 +201,7 @@ class RoundIconButton extends StatelessWidget {
       this.icon,
       this.iconColor,
       this.onPressed,
-  }) : size = 70.0;
+  }) : size = 90.0;
 
   RoundIconButton.small({
       this.icon,

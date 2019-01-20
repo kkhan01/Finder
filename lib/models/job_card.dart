@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:glowing_guacamole/models/job.dart';
 
 class JobCard extends StatelessWidget {
-  final String company;
-  final String location;
-  final String position;
-  final String description;
-  final String url;
+  final Job job;
 
-  JobCard({this.company, this.location, this.position, this.description, this.url});
-
+  JobCard(this.job);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +18,7 @@ class JobCard extends StatelessWidget {
               children: <Widget>[
                 Center(
                   child: Text(
-                    company,
+                    job.company,
                     style: TextStyle(
                       fontSize: 64.0, // NEEDS TO ADJUST
                       fontWeight: FontWeight.bold,
@@ -33,9 +29,9 @@ class JobCard extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Text(
-                      location,
+                      job.location,
                       style: TextStyle(
-                        fontSize: 24.0, // NEEDS TO ADJUST
+                        fontSize: 24.0,
                       ),
                     ),
                   ),
@@ -56,7 +52,7 @@ class JobCard extends StatelessWidget {
                     right: 16.0,
                   ),
                   child: Text(
-                    position,
+                    job.position,
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
@@ -70,7 +66,7 @@ class JobCard extends StatelessWidget {
                     right: 16.0,
                   ),
                   child: Text(
-                    description,
+                    job.description,
                     style: TextStyle(
                       fontSize: 16.0,
                     ),

@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
             Icons.inbox,
             color: Colors.black,
           ),
-          onPressed: () => Navigator.push(ctx, PageTwo()),
+          onPressed: () => Navigator.push(ctx, SavedPage()),
         ),
         actions: <Widget>[
           IconButton(
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
               color: Colors.black,
             ),
             onPressed: (){
-              Navigator.push(ctx, PageThree());
+              Navigator.push(ctx, SettingsPage());
             },
           )
         ],
@@ -77,12 +77,14 @@ class MyApp extends StatelessWidget {
       body: Container(
         color: Colors.white,
         child: JobCard(
-          company: "Facebook",
-          location: "New York, NY",
-          position: "Software Engineer, Intern/Co-op",
-          description: "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds",
-          url: "https://www.facebook.com",
+          Job(
+            "Facebook", 
+            "New York, NY", 
+            "Software Engineer, Intern/Co-op", 
+            "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds",
+            "https://www.facebook.com",
           ),
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
@@ -127,8 +129,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class PageTwo extends MaterialPageRoute<Null> {
-  PageTwo() : super(builder: (BuildContext ctx) {
+class SavedPage extends MaterialPageRoute<Null> {
+  SavedPage() : super(builder: (BuildContext ctx) {
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -169,8 +171,8 @@ class PageTwo extends MaterialPageRoute<Null> {
   });
 }
 
-class PageThree extends MaterialPageRoute<Null> {
-  PageThree() : super(builder: (BuildContext ctx) {
+class SettingsPage extends MaterialPageRoute<Null> {
+  SettingsPage() : super(builder: (BuildContext ctx) {
       return Scaffold(
         appBar: AppBar(
           centerTitle: true,

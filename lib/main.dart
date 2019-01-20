@@ -159,7 +159,11 @@ class SavedPage extends MaterialPageRoute<Null> {
         body: Container(
           color: Colors.white,
           child: Padding(
-            padding: const EdgeInsets.all(32.0),
+            padding: const EdgeInsets.only(
+              top: 8.0,
+              left: 32.0,
+              right: 32.0,
+            ),
             child: Column(
               children: <Widget>[
                 Padding(

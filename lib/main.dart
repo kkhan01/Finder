@@ -16,8 +16,8 @@ void main() {
       debugShowCheckedModeBanner: false,
       home: MyApp(),
       routes: <String, WidgetBuilder> {
-        '/home': (BuildContext ctx) => new MyApp()/*,
-        '/saved' : (BuildContext ctx) => new SavedPage(),
+        '/home': (BuildContext ctx) => new MyApp(),
+        '/saved' : (BuildContext ctx) => new MyHomePage()/*,
         '/settings' : (BuildContext ctx) => new SettingsPage()*/
       },
       // theme: themeData,
@@ -81,6 +81,7 @@ class _MyApp extends State<MyApp> {
             color: Colors.black,
           ),
           //onPressed: () => Navigator.push(ctx, SavedPage()),
+          onPressed: () => Navigator.of(ctx).pushNamed('/saved'),
         ),
         actions: <Widget>[
           IconButton(

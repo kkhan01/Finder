@@ -25,10 +25,10 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  
   @override
   _MyApp createState() => _MyApp();
 }
+
 class _MyApp extends State<MyApp> {
   // TODO: api call to set job list here
   int _id = 0;

@@ -10,3 +10,15 @@ import './models/job.dart';
 // TODO: merge legacy2.dart
 // TODO: add database_helper.dart
 
+void main() {
+  runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyApp(),
+      routes: <String, WidgetBuilder> {
+        '/home': (BuildContext context) => new MyApp(),
+        '/saved' : (BuildContext context) => new SavedPage(),
+        '/settings' : (BuildContext context) => new SettingsPage()
+      },
+      // theme: themeData,
+  ));
+}

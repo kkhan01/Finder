@@ -33,11 +33,14 @@ class MyApp extends StatefulWidget {
 class _MyApp extends State<MyApp> {
   // TODO: api call to set job list here
   int _id = 0;
-  String jL_company = "Facebook";
-  String jL_location = "New York, NY";
-  String jL_position = "Software Engineer, Intern/Co-op";
-  String jL_description = "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds";
-  String jL_url = "https://www.facebook.com";
+
+  Job currentJob = Job(
+    "Facebook", 
+    "New York, NY", 
+    "Software Engineer, Intern/Co-op",
+    "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds",
+    "https://www.facebook.com"
+  );
   
   // TODO: function to pop first in job list
   // sets variables to the value of next in array
@@ -101,13 +104,7 @@ class _MyApp extends State<MyApp> {
       body: Container(
         color: Colors.white,
         child: JobCard(
-          Job(
-            "$jL_company$_id", 
-            "$jL_location", 
-            "$jL_position", 
-            "$jL_description",
-            "$jL_url",
-          ),
+          currentJob
         ),
       ),
       bottomNavigationBar: BottomAppBar(

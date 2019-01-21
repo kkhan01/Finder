@@ -17,11 +17,13 @@ class JobCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Center(
-                  child: Text(
-                    job.company,
-                    style: TextStyle(
-                      fontSize: 64.0, // NEEDS TO ADJUST
-                      fontWeight: FontWeight.bold,
+                  child: FittedBox(
+                    child: Text(
+                      job.company,
+                      style: TextStyle(
+                        fontSize: 64.0, // NEEDS TO ADJUST
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

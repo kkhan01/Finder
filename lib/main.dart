@@ -163,3 +163,31 @@ class _MyApp extends State<MyApp> {
     );
   }
 }
+
+
+String _parseHtmlString(String htmlString) {
+  var document = parse(htmlString);
+
+  String parsedString = parse(document.body.text).documentElement.text;
+
+  return parsedString;
+}
+
+Future<List<Job>> fetchJobs(
+  http.Client client, String position, String state, String city) async {
+  List<Job> jobs = List<Job>();
+  final String pos = position.replaceAll(new RegExp(r' '), ',');
+  final String API_KEY = '';
+  final String url =
+  'https://authenticjobs.com/api/?api_key=${API_KEY}&method=aj.jobs.search&keywords=${pos}&location=${city}, ${state}&perpage=20&format=json';
+
+  final response = await client.get(url);
+  return compute(parseJobs, response.body);
+}
+
+List<Job> parseJobs(String responseBody) {
+  final parsed = json.decode(responseBody);
+  return parsed['listings']['listing']
+  .map<Job>((json) => new Job.fromJson(json))
+  .toList();
+}

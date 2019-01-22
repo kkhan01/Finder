@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+
 import 'package:glowing_guacamole/models/job_card.dart';
 import 'package:glowing_guacamole/models/round_icon_button.dart';
 import 'package:glowing_guacamole/pages/saved_page.dart';
@@ -9,6 +10,7 @@ import 'package:html/parser.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'package:glowing_guacamole/models/job.dart';
+import 'dart:developer';
 // TODO: merge legacy.dart
 // TODO: add database_helper.dart
 
@@ -31,77 +33,67 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-  // TODO: api call to set job list here
   int _id = 0;
   
   List<Job> jL = [Job(
-      "Facebook", 
-      "New York, NY", 
-      "Software Engineer, Intern/Co-op",
-      "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds",
-      "https://www.facebook.com"
-    ), Job(
-      "Grubhub", 
-      "New York, NY", 
-      "Software Engineer, Intern/Co-op",
-      "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds",
-      "https://www.facebook.com"
+      "Oops!", 
+      "Try hitting refresh ONCE!\n   (orange arrow below)\n    Then wait a second.", 
+      "Possible Issues:",
+      "1\) Internet connectivity failed.\n2\) Your settings did not make sense.\n3\) Offline sync ran out and we need to rescrape.\n4)\ You've saved every job we could scrape (try again later).",
+      "https://www.google.com"
   )];
 
-   Job currentJob = Job(
-      "Oops!", 
-      "Try hitting refresh a couple of times! (orange arrow in the middle)", 
-      "Possible Issues:",
-      "1\) Internet connectivity failed.\n2\) Your settings did not make sense.\n3\) Offline sync ran out and we need to rescrape.\n4)\You've saved every job we could scrape.",
-      "https://www.google.com"
+  Job currentJob = Job(
+    "Oops!", 
+    "Try hitting refresh ONCE!\n   (orange arrow below)\n    Then wait a second.", 
+    "Possible Issues:",
+    "1\) Internet connectivity failed.\n2\) Your settings did not make sense.\n3\) Offline sync ran out and we need to rescrape.\n4)\ You've saved every job we could scrape (try again later).",
+    "https://www.google.com"
   );
-  //currentJob = jL[0];
-
-  
-  List<Job> _jobs = [Job("","","","","")];
   
   Future<void> _getjobs() async {
     jL = await fetchJobs(http.Client(), "intern", "New York", "NY");
     for (var i = 0; i < jL.length; i++){
       jL[i].description = _parseHtmlString(jL[i].description);
     }
+    _setnext();
   }
 
-
-  
-  // TODO: function to pop first in job list
-  // sets variables to the value of next in array
-  // if list is empty, set values to like error message saying to refresh
   void _setnext() {
     setState(() {
-        /* ... */
-        if(_id > 0){
-          currentJob = jL[1];
-        }else if(_id == 0){
-          //**//
-        }else{
-          currentJob = jL[0];
+        if(_id < 0){
+          _id = 0;
+        }else if(_id >= jL.length){
+          _id = 0;
+          jL = [Job(
+              "Oops!", 
+              "Try hitting refresh ONCE!\n   (orange arrow below)\n    Then wait a second.", 
+              "Possible Issues:",
+              "1\) Internet connectivity failed.\n2\) Your settings did not make sense.\n3\) Offline sync ran out and we need to rescrape.\n4)\ You've saved every job we could scrape (try again later).",
+              "https://www.google.com"
+          )];
         }
+        currentJob = jL[_id];
     });
   }
+  
   void _nextjob() {
     setState(() {
-        /* ... */
         _id++;
         _setnext();
     });
   }
   void _savejob() {
     setState(() {
-        /* ... */
-        _id--;
+        // TODO: add job to database
+        _id++;
         _setnext();
     });
   }
   Future<void> _refreshjob() async {
     await _getjobs();
     setState(() {
-        _id = 0;
+        _id = -1;
         _setnext();
     });
   }
@@ -135,14 +127,12 @@ class _MyApp extends State<MyApp> {
               color: Colors.black,
             ),
             onPressed: (){
-              Navigator.of(ctx).pushNamed('/settings');//Navigator.push(ctx, SettingsPage());
+              Navigator.of(ctx).pushNamed('/settings');
             },
           )
         ],
       ),
       
-      // TODO: add card class and make it work with api
-      // (can test with hard coded joblist before incorportating api)
       body: Container(
         color: Colors.white,
         child: JobCard(
@@ -201,12 +191,12 @@ String _parseHtmlString(String htmlString) {
 }
 
 Future<List<Job>> fetchJobs(
-    http.Client client, String position, String state, String city) async {
+  http.Client client, String position, String state, String city) async {
   List<Job> jobs = List<Job>();
   final String pos = position.replaceAll(new RegExp(r' '), ',');
   final String API_KEY = '';
   final String url =
-      'https://authenticjobs.com/api/?api_key=${API_KEY}&method=aj.jobs.search&keywords=${pos}&location=${city}, ${state}&perpage=20&format=json';
+  'https://authenticjobs.com/api/?api_key=${API_KEY}&method=aj.jobs.search&keywords=${pos}&location=${city}, ${state}&perpage=20&format=json';
 
   final response = await client.get(url);
   return compute(parseJobs, response.body);

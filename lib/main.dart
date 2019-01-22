@@ -62,6 +62,9 @@ class _MyApp extends State<MyApp> {
   
   Future<void> _getjobs() async {
     jL = await fetchJobs(http.Client(), "intern", "New York", "NY");
+    for (var i = 0; i < jL.length; i++){
+      jL[i].description = _parseHtmlString(jL[i].description);
+    }
   }
 
 

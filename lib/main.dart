@@ -33,8 +33,8 @@ class MyApp extends StatefulWidget {
 class _MyApp extends State<MyApp> {
   // TODO: api call to set job list here
   int _id = 0;
-
-  List<Job>jL = [Job(
+  
+  List<Job> jL = [Job(
       "Facebook", 
       "New York, NY", 
       "Software Engineer, Intern/Co-op",
@@ -50,12 +50,21 @@ class _MyApp extends State<MyApp> {
 
    Job currentJob = Job(
       "Oops!", 
-      "Try hitting refresh! (orange arrow in the middle)", 
+      "Try hitting refresh a couple of times! (orange arrow in the middle)", 
       "Possible Issues:",
       "1\) Internet connectivity failed.\n2\) Your settings did not make sense.\n3\) Offline sync ran out and we need to rescrape.\n4)\You've saved every job we could scrape.",
       "https://www.google.com"
   );
   //currentJob = jL[0];
+
+  
+  List<Job> _jobs = [Job("","","","","")];
+  
+  Future<void> _getjobs() async {
+    jL = await fetchJobs(http.Client(), "intern", "New York", "NY");
+  }
+
+
   
   // TODO: function to pop first in job list
   // sets variables to the value of next in array
@@ -65,6 +74,8 @@ class _MyApp extends State<MyApp> {
         /* ... */
         if(_id > 0){
           currentJob = jL[1];
+        }else if(_id == 0){
+          //**//
         }else{
           currentJob = jL[0];
         }
@@ -84,9 +95,9 @@ class _MyApp extends State<MyApp> {
         _setnext();
     });
   }
-  void _refreshjob() {
+  Future<void> _refreshjob() async {
+    await _getjobs();
     setState(() {
-        /* ... */
         _id = 0;
         _setnext();
     });
@@ -187,12 +198,12 @@ String _parseHtmlString(String htmlString) {
 }
 
 Future<List<Job>> fetchJobs(
-  http.Client client, String position, String state, String city) async {
+    http.Client client, String position, String state, String city) async {
   List<Job> jobs = List<Job>();
   final String pos = position.replaceAll(new RegExp(r' '), ',');
   final String API_KEY = '';
   final String url =
-  'https://authenticjobs.com/api/?api_key=${API_KEY}&method=aj.jobs.search&keywords=${pos}&location=${city}, ${state}&perpage=20&format=json';
+      'https://authenticjobs.com/api/?api_key=${API_KEY}&method=aj.jobs.search&keywords=${pos}&location=${city}, ${state}&perpage=20&format=json';
 
   final response = await client.get(url);
   return compute(parseJobs, response.body);
@@ -229,3 +240,4 @@ class JobsList extends StatelessWidget {
     );
   }
 }
+

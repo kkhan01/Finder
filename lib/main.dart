@@ -34,13 +34,28 @@ class _MyApp extends State<MyApp> {
   // TODO: api call to set job list here
   int _id = 0;
 
-  Job currentJob = Job(
-    "Facebook", 
-    "New York, NY", 
-    "Software Engineer, Intern/Co-op",
-    "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds",
-    "https://www.facebook.com"
+  List<Job>jL = [Job(
+      "Facebook", 
+      "New York, NY", 
+      "Software Engineer, Intern/Co-op",
+      "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds",
+      "https://www.facebook.com"
+    ), Job(
+      "Grubhub", 
+      "New York, NY", 
+      "Software Engineer, Intern/Co-op",
+      "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds",
+      "https://www.facebook.com"
+  )];
+
+   Job currentJob = Job(
+      "Oops!", 
+      "Try hitting refresh! (orange arrow in the middle)", 
+      "Possible Issues:",
+      "1\) Internet connectivity failed.\n2\) Your settings did not make sense.\n3\) Offline sync ran out and we need to rescrape.\n4)\You've saved every job we could scrape.",
+      "https://www.google.com"
   );
+  //currentJob = jL[0];
   
   // TODO: function to pop first in job list
   // sets variables to the value of next in array
@@ -48,13 +63,11 @@ class _MyApp extends State<MyApp> {
   void _setnext() {
     setState(() {
         /* ... */
-        currentJob = Job(
-          "Facebook$_id", 
-          "New York, NY", 
-          "Software Engineer, Intern/Co-op",
-          "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds",
-          "https://www.facebook.com"
-        );
+        if(_id > 0){
+          currentJob = jL[1];
+        }else{
+          currentJob = jL[0];
+        }
     });
   }
   void _nextjob() {
@@ -190,4 +203,29 @@ List<Job> parseJobs(String responseBody) {
   return parsed['listings']['listing']
   .map<Job>((json) => new Job.fromJson(json))
   .toList();
+}
+
+class JobsList extends StatelessWidget {
+  final List<Job> jobs;
+
+  JobsList({Key key, this.jobs}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: jobs.length,
+      itemExtent: 2500,
+      itemBuilder: (context, index) {
+        return Column(
+          children: <Widget>[
+            Text(jobs[index].company),
+            Text(jobs[index].location),
+            Text(jobs[index].position),
+            Text(_parseHtmlString(jobs[index].description)),
+            Text(jobs[index].url),
+          ],
+        );
+      },
+    );
+  }
 }

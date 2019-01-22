@@ -52,7 +52,7 @@ class _MyApp extends State<MyApp> {
   );
   
   Future<void> _getjobs() async {
-    jL = await fetchJobs(http.Client(), "intern", "New York", "NY");
+    jL = await fetchJobs(http.Client(), "php,mysql", "New York", "NY");
     for (var i = 0; i < jL.length; i++){
       jL[i].description = _parseHtmlString(jL[i].description);
     }
@@ -196,7 +196,7 @@ Future<List<Job>> fetchJobs(
   final String pos = position.replaceAll(new RegExp(r' '), ',');
   final String API_KEY = '';
   final String url =
-  'https://authenticjobs.com/api/?api_key=${API_KEY}&method=aj.jobs.search&keywords=${pos}&location=${city}, ${state}&perpage=20&format=json';
+  'https://authenticjobs.com/api/?api_key=${API_KEY}&method=aj.jobs.search&keywords=${pos}&location=${city}, ${state}, US, USA&perpage=20&format=json';
 
   final response = await client.get(url);
   return compute(parseJobs, response.body);

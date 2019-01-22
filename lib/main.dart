@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:html/parser.dart';
 import 'dart:convert';
 import 'dart:async';
-import './models/job.dart';
+import 'package:glowing_guacamole/models/job.dart';
 // TODO: merge legacy.dart
 // TODO: add database_helper.dart
 
@@ -45,22 +45,37 @@ class _MyApp extends State<MyApp> {
   // TODO: function to pop first in job list
   // sets variables to the value of next in array
   // if list is empty, set values to like error message saying to refresh
+  void _setnext() {
+    setState(() {
+        /* ... */
+        currentJob = Job(
+          "Facebook$_id", 
+          "New York, NY", 
+          "Software Engineer, Intern/Co-op",
+          "Code high-volume software using primarily C++ and Java, create web applications using primarily PHP, implement web interfaces using XHTML, CSS, and JavaScript, build report interfaces and data feeds",
+          "https://www.facebook.com"
+        );
+    });
+  }
   void _nextjob() {
     setState(() {
         /* ... */
         _id++;
+        _setnext();
     });
   }
   void _savejob() {
     setState(() {
         /* ... */
         _id--;
+        _setnext();
     });
   }
   void _refreshjob() {
     setState(() {
         /* ... */
         _id = 0;
+        _setnext();
     });
   }
 

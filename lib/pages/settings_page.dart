@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -22,6 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext ctx) {
+    //TODO: build using previous values from shared preferences
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -40,14 +42,17 @@ class _SettingsPageState extends State<SettingsPage> {
               Icons.check,
               color: Colors.black,
             ),
-            onPressed: (){
-              // TODO: save settings method called here, are we using another db? we should use a json or smth....
+            onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.setString('position', _positionController.text);
+              await prefs.setString('city', _cityController.text);
+              await prefs.setString('state', selectedState);
               Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));
             },
           )
         ],
       ),
-      
+
       // TODO: form for api search
       body: Container(
         color: Colors.white,

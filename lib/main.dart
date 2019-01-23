@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
+import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:html/parser.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:glowing_guacamole/models/job.dart';
 import 'package:glowing_guacamole/models/job_card.dart';
 import 'package:glowing_guacamole/models/round_icon_button.dart';
+
 import 'package:glowing_guacamole/pages/saved_page.dart';
 import 'package:glowing_guacamole/pages/settings_page.dart';
-import 'package:http/http.dart' as http;
-import 'package:html/parser.dart';
-import 'dart:convert';
-import 'dart:async';
-import 'package:glowing_guacamole/models/job.dart';
-import 'dart:developer';
+
 // TODO: merge legacy.dart
 // TODO: add database_helper.dart
 

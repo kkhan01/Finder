@@ -56,9 +56,19 @@ class _MyApp extends State<MyApp> {
   );
   
   Future<void> _getjobs() async {
-    jL = await fetchJobs(http.Client(), "php,mysql", "New York", "NY");
-    for (var i = 0; i < jL.length; i++){
-      jL[i].description = _parseHtmlString(jL[i].description);
+    jL = await fetchJobs(http.Client(), "intern", "New York", "NY");
+    if (jL == null){
+      jL = [Job(
+          "Oops!", 
+          "Try hitting refresh ONCE!\n   (orange arrow below)\n    Then wait a second.", 
+          "Possible Issues:",
+          "1\) Internet connectivity failed.\n2\) Your settings did not make sense.\n3\) Offline sync ran out and we need to rescrape.\n4)\ You've saved every job we could scrape (try again later).",
+          "https://www.google.com"
+      )];
+    }else{
+      for (var i = 0; i < jL.length; i++){
+        jL[i].description = _parseHtmlString(jL[i].description);
+      }
     }
     _setnext();
   }
@@ -67,7 +77,8 @@ class _MyApp extends State<MyApp> {
     setState(() {
         if(_id < 0){
           _id = 0;
-        }else if(_id >= jL.length){
+        }
+        if (_id >= jL.length){
           _id = 0;
           jL = [Job(
               "Oops!", 
@@ -89,7 +100,6 @@ class _MyApp extends State<MyApp> {
   }
   void _savejob() {
     setState(() {
-        // TODO: add job to database
         _id++;
         _setnext();
     });

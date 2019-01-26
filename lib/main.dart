@@ -8,6 +8,8 @@ import 'dart:developer';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:glowing_guacamole/utils/database_helper.dart';
+
 import 'package:glowing_guacamole/models/job.dart';
 import 'package:glowing_guacamole/models/job_card.dart';
 import 'package:glowing_guacamole/models/round_icon_button.dart';
@@ -37,6 +39,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
+  DatabaseHelper helper = DatabaseHelper();
   int _id = 0;
   
   List<Job> jL = [Job(
@@ -98,7 +101,11 @@ class _MyApp extends State<MyApp> {
         _setnext();
     });
   }
-  void _savejob() {
+  void _savejob() async {
+    if(currentJob.company != "Oops!"){
+      int result = await helper.insertJob(currentJob);
+      // do we want to do anything with the status?
+    }
     setState(() {
         _id++;
         _setnext();

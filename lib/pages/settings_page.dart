@@ -53,7 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             onPressed: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
-              await prefs.setString('position', _positionController.text) ?? 'Software Engineering Intern';
+              await prefs.setString('keywords', _positionController.text) ?? 'Intern';
               await prefs.setString('city', _cityController.text) ?? 'New York City';
               await prefs.setString('state', selectedState) ?? 'NY';
               Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));
@@ -91,7 +91,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     child: Center(
                       child: Icon(
-                        Icons.person,
+                        Icons.find_in_page,
                         size: 48.0,
                       ),
                     ),

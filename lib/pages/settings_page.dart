@@ -63,132 +63,132 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
 
       // TODO: form for api search
-        body: FutureBuilder<List<String>>(
-            future: _getPrefs(),
-            builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
-              return Container(
-                  color: Colors.white,
-                  child: Padding(
-                      padding: const EdgeInsets.only(
-                          top: 16.0,
-                          left: 32.0,
-                          right: 32.0,
+      body: FutureBuilder<List<String>>(
+        future: _getPrefs(),
+        builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+          return Container(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 16.0,
+                left: 32.0,
+                right: 32.0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    "Search Preferences",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24.0,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 8.0,
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.person,
+                        size: 48.0,
                       ),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                                "Search Preferences",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 24.0,
-                                ),
+                    ),
+                  ),
+                  Text(
+                    "Position",
+                    style: TextStyle(
+                      fontSize: 16.0
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8.0,
+                      bottom: 16.0
+                    ),
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      controller: _positionController,
+                      decoration: InputDecoration(
+                        hintText: snapshot.hasError ? 'Position' : snapshot.data[0],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 16.0,
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.location_on,
+                        size: 48.0,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "City",
+                    style: TextStyle(
+                      fontSize: 16.0
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8.0,
+                      bottom: 8.0,
+                    ),
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      controller: _cityController,
+                      decoration: InputDecoration(
+                        hintText: snapshot.hasError ? 'City' : snapshot.data[1],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 8.0,
+                    ),
+                    child: Text(
+                      "State",
+                      style: TextStyle(
+                        fontSize: 16.0
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 32.0
+                    ),
+                    child: DropdownButton(
+                      hint: Text(
+                        "Select a state",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      value: selectedState,
+                      onChanged: (String state) {
+                        setState(() {
+                            selectedState = state;
+                        });
+                      },
+                      items: states.map((String state) {
+                          return new DropdownMenuItem<String>(
+                            value: state,
+                            child: new Text(
+                              state
                             ),
-                            Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 8.0,
-                                ),
-                                child: Center(
-                                    child: Icon(
-                                        Icons.person,
-                                        size: 48.0,
-                                    ),
-                                ),
-                            ),
-                            Text(
-                                "Position",
-                                style: TextStyle(
-                                    fontSize: 16.0
-                                ),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8.0,
-                                    bottom: 16.0
-                                ),
-                                child: TextField(
-                                    textAlign: TextAlign.center,
-                                    controller: _positionController,
-                                    decoration: InputDecoration(
-                                        hintText: snapshot.hasError ? 'Position' : snapshot.data[0],
-                                    ),
-                                ),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 16.0,
-                                ),
-                                child: Center(
-                                    child: Icon(
-                                        Icons.location_on,
-                                        size: 48.0,
-                                    ),
-                                ),
-                            ),
-                            Text(
-                                "City",
-                                style: TextStyle(
-                                    fontSize: 16.0
-                                ),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8.0,
-                                    bottom: 8.0,
-                                ),
-                                child: TextField(
-                                    textAlign: TextAlign.center,
-                                    controller: _cityController,
-                                    decoration: InputDecoration(
-                                        hintText: snapshot.hasError ? 'City' : snapshot.data[1],
-                                    ),
-                                ),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 8.0,
-                                ),
-                                child: Text(
-                                    "State",
-                                    style: TextStyle(
-                                        fontSize: 16.0
-                                    ),
-                                ),
-                            ),
-                            Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 32.0
-                                ),
-                                child: DropdownButton(
-                                    hint: Text(
-                                        "Select a state",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                        ),
-                                    ),
-                                    value: selectedState,
-                                    onChanged: (String state) {
-                                      setState(() {
-                                        selectedState = state;
-                                      });
-                                    },
-                                    items: states.map((String state) {
-                                      return new DropdownMenuItem<String>(
-                                          value: state,
-                                          child: new Text(
-                                              state
-                                          ),
-                                      );
-                                    }).toList(),
-                                    ),
-                                    )
-                                        ],
-                                        ),
-                                        )
-                                            );
-            }
-        )
-            );
+                          );
+                      }).toList(),
+                    ),
+                  )
+                ],
+              ),
+            )
+          );
+        }
+      )
+    );
   }
 }

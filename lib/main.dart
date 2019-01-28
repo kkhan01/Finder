@@ -216,7 +216,7 @@ Future<List<Job>> fetchJobs(
   http.Client client, String position, String state, String city) async {
   List<Job> jobs = List<Job>();
   final String pos = position.replaceAll(new RegExp(r' '), ',');
-  final String API_KEY = '1b460e32a2d882ceb1e3f8996396891c';
+  final String API_KEY = '';
   final String url =
   'https://authenticjobs.com/api/?api_key=${API_KEY}&method=aj.jobs.search&keywords=${pos}&location=${city}, ${state}, US, USA&perpage=20&format=json';
 

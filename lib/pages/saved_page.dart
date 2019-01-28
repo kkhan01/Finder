@@ -62,19 +62,26 @@ class _SavedPageState extends State<SavedPage> {
     return ListView.builder(
       itemCount: count,
       itemBuilder: (BuildContext ctx, int index) {
-        return Card(
-          color: Colors.white,
+        return Padding(
+          padding: const EdgeInsets.only(
+            top: 8.0,
+            left: 16.0,
+            right: 16.0
+          ),
+          child: Card(
+            color: Colors.white,
 					elevation: 2.0,
 					child: ListTile(
-            title: Text(this.jobList[index].company,),
-            subtitle: Text(this.jobList[index].position),
-            trailing: GestureDetector(
+              title: Text(this.jobList[index].company,),
+              subtitle: Text(this.jobList[index].position),
+              trailing: GestureDetector(
 							child: Icon(Icons.delete_outline),
 							onTap: () {
 								_delete(ctx, jobList[index]);
 							},
+              ),
+              
             ),
-            
           ),
         );
       }

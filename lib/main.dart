@@ -91,6 +91,7 @@ class _MyApp extends State<MyApp> {
               "https://www.google.com"
           )];
         }
+        // checks go here (just for loop the db jobs) + recall _setnext?
         currentJob = jL[_id];
     });
   }

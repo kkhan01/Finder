@@ -7,6 +7,7 @@ import 'dart:developer';
 
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:glowing_guacamole/utils/database_helper.dart';
 
@@ -60,6 +61,11 @@ class _MyApp extends State<MyApp> {
   
   Future<void> _getjobs() async {
     jL = await fetchJobs(http.Client(), "intern", "New York", "NY");
+    if (jL != null) {
+      print('Received ${jL.length} jobs');
+    } else {
+      print('Received a null list for jobs');
+    }
     if (jL == null){
       jL = [Job(
           "Oops!", 
@@ -215,7 +221,12 @@ String _parseHtmlString(String htmlString) {
 Future<List<Job>> fetchJobs(
   http.Client client, String position, String state, String city) async {
   List<Job> jobs = List<Job>();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  position = await prefs.getString('position');
   final String pos = position.replaceAll(new RegExp(r' '), ',');
+  city = await prefs.getString('city');
+  state = await prefs.getString('state');
+  print('Searching for: ${pos} ${city} ${state}');
   final String API_KEY = '';
   final String url =
   'https://authenticjobs.com/api/?api_key=${API_KEY}&method=aj.jobs.search&keywords=${pos}&location=${city}, ${state}, US, USA&perpage=20&format=json';

@@ -17,6 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   final TextEditingController _positionController = new TextEditingController();
   final TextEditingController _cityController = new TextEditingController();
+  bool _initalSetup = false;
 
   String selectedState;
   List<String> states = <String>[ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
@@ -27,6 +28,12 @@ class _SettingsPageState extends State<SettingsPage> {
     await ret.add(prefs.getString('position'));
     await ret.add(prefs.getString('city'));
     await ret.add(prefs.getString('state'));
+    if (!_initalSetup) {
+        _positionController.text = ret[0];
+        _cityController.text = ret[1];
+        selectedState = ret[2];
+        _initalSetup = true;
+    }
     return ret;
   }
 
@@ -53,9 +60,9 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             onPressed: () async {
               SharedPreferences prefs = await SharedPreferences.getInstance();
-              await prefs.setString('keywords', _positionController.text) ?? 'Intern';
-              await prefs.setString('city', _cityController.text) ?? 'New York City';
-              await prefs.setString('state', selectedState) ?? 'NY';
+              await prefs.setString('position', _positionController.text ?? 'Intern');
+              await prefs.setString('city', _cityController.text ?? 'New York City');
+              await prefs.setString('state', selectedState ?? 'NY');
               Navigator.popUntil(ctx, ModalRoute.withName(Navigator.defaultRouteName));
             },
           )
